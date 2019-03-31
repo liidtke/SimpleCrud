@@ -1,0 +1,56 @@
+{
+  "name": "simple-crud",
+  "type": "project:application",
+  "paths": {
+    "root": "src",
+    "resources": "resources",
+    "elements": "resources/elements",
+    "attributes": "resources/attributes",
+    "valueConverters": "resources/value-converters",
+    "bindingBehaviors": "resources/binding-behaviors"
+  },
+  "transpiler": {
+    "id": "typescript",
+    "fileExtension": ".ts"
+  },
+  "build": {
+    "options": {
+      "server": "dev",
+      "extractCss": "prod",
+      "coverage": false
+    }
+  },
+  "platform": {
+    "hmr": false,
+    "open": false,
+    "port": 8080,
+    "output": "dist"
+  },
+  "packageManager": "npm",
+  "dependencies": [
+    {
+      "name":"jquery",
+      "path":"../node_modules/jquery/dist",
+      "main":"jquery.min",
+      "exports": "$"
+    },
+    {
+      "name": "semantic-ui-css",
+      "path": "../node_modules/semantic-ui-css",
+      "main": "semantic.min.js",
+      "resources": [
+        "semantic.min.css"
+      ],
+      "deps": ["jquery"]
+    },
+    {
+      "name": "toastr",
+      "path": "../node_modules/toastr",
+      "main": "toastr.js",
+      "resources": [
+        "/build/toastr.css"
+      ],
+      "deps": ["jquery"]
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+<template>
+        <div class="ui basic top segment container">
+            <h1 class="ui dividing header">Pessoas</h1>
+    
+            <a class="ui basic button primary" click.delegate="addLine()"><i class="plus icon"></i>Adicionar</a>
+           
+            <require from="shared/loader-component.html"></require>
+            <loader-component loading.bind="service.loading"></loader-component>
+    
+            <div class="ui vertical basic segment">
+                <div class="ui form">
+    
+                    <table class="ui selectable table" if.bind="!service.loading">
+                        <thead>
+                            <tr>
+                                <th class="three wide">Nome</th>
+                                <th class="three wide">Email</th>
+                                <th class="three wide">Telefone</th>
+                                <th class="six wide"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr repeat.for="person of people" style="height:60px">
+                                <td if.bind="person.id != getEditItem">${person.name}</td>
+                                <td if.bind="person.id != getEditItem">${person.email}</td>
+                                <td if.bind="person.id != getEditItem">${person.phone}</td>
+                                <td class="right aligned" show.bind="person.id != getEditItem">
+                                    <button class="ui basic blue button" click.delegate="edit(person.id)" if.bind="getEditItem == null">editar</button>
+                                </td>
+
+                                <td if.bind="person.id == getEditItem">
+                                        <div class="ui field">
+                                            <input class="ui input" type="text" placeholder="Nome" value.bind="personInEdit.name">
+                                        </div>
+                                </td>
+
+                                <td if.bind="person.id == getEditItem">
+                                        <div class="ui field">
+                                            <input class="ui input" type="text" placeholder="Email" value.bind="personInEdit.email">
+                                        </div>
+                                </td>
+
+                                <td if.bind="person.id == getEditItem">
+                                        <div class="ui field">
+                                            <input class="ui input" type="text" placeholder="Telefone" value.bind="personInEdit.phone">
+                                        </div>
+                                </td>
+
+                                <td if.bind="person.id == getEditItem">
+                                    <div class="one field">
+                                        
+                                        <div class="ui field">
+                                            <button class="ui animated basic button" click.delegate="edit(null)" tabindex="0">
+                                                <div class="hidden content">Cancelar</div>
+                                                <div class="visible content">
+                                                    <i class="cancel icon"></i>
+                                                </div>
+                                            </button>
+                                            <button class="ui animated basic negative button" click.delegate="remove(person)"
+                                                if.bind="getEditItem > 0">
+                                                <div class="hidden content">Excluir</div>
+                                                <div class="visible content">
+                                                    <i class="trash icon"></i>
+                                                </div>
+                                            </button>
+                                            <button class="ui animated basic primary button" click.delegate="save(personInEdit)">
+                                                <div class="hidden content">Salvar</div>
+                                                <div class="visible content">
+                                                    <i class="save icon"></i>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    
+    
+        </div>
+    </template>
